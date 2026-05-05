@@ -45,7 +45,8 @@ const SendParcel = () => {
 
     }
    }
-
+console.log('cost',cost);
+data.cost=cost;
 Swal.fire({
         title: "Are you sure?",
         text: `Total Cost: ${cost} TK. Do you want to send this parcel?`,
