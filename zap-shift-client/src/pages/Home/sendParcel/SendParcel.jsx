@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm, useWatch } from 'react-hook-form';
-import { useLoaderData } from 'react-router';
+import { useLoaderData, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import useAuth from '../../../hooks/useAuth';
@@ -12,6 +12,7 @@ const SendParcel = () => {
     const {user}=useAuth();
 
    const axiosSecure=useAxiosSecure();
+   const navigate=useNavigate();
     const serviceCenters=useLoaderData();
     const regionsDuplicate=serviceCenters.map(c=>c.region);
     const regions=[...new Set(regionsDuplicate)];
@@ -54,7 +55,7 @@ Swal.fire({
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, Send it!"
+        confirmButtonText: "confirm and send it !"
     }).then((result) => {
         // Jodi user 'Yes' click kore
         if (result.isConfirmed) {
@@ -62,14 +63,20 @@ Swal.fire({
             axiosSecure.post('/parcels',data)
             .then(res=>{
                 console.log( 'after save parcel',res.data);
+                if(res.data.insertedId){
+                  navigate('/dashboard/my-parcels')
+               Swal.fire({
+  position: "top-end",
+  icon: "success",
+  title: "parcel has created please pay work has been saved",
+  showConfirmButton: false,
+  timer: 2500
+});
+                }
             })
             // Eikhane tumi tomar API call korte paro (e.g., axios.post)
             
-            // Swal.fire({
-            //     title: "Success!",
-            //     text: "Your parcel has been sent successfully.",
-            //     icon: "success"
-            // });
+            
         }
     });
 

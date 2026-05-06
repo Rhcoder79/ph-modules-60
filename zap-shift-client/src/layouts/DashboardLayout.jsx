@@ -34,7 +34,7 @@ const DashboardLayout = () => {
         </li>
 {/* our dashboard links */}
 <li>
-  <NavLink to='dashboard/my-parcels' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="MyParcels" >
+  <NavLink to='my-parcels' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="MyParcels" >
      <CiDeliveryTruck /> 
               <span className="is-drawer-close:hidden">my parcels</span>
               </NavLink>
