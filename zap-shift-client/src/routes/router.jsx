@@ -14,6 +14,11 @@ import Payment from "../pages/Dashboard/Payment/Payment";
 import PaymentSuccss from "../pages/Dashboard/Payment/PaymentSuccss";
 import PaymentCancelled from "../pages/Dashboard/Payment/PaymentCancelled";
 import PaymentHistory from "../pages/Dashboard/Payment/PaymentHistory/PaymentHistory";
+import ApprovedRiders from "../pages/Dashboard/ApprovedRiders/ApprovedRiders";
+import UsersManagement from "../pages/Dashboard/UsersManagement/UsersManagement";
+import AdminRoute from "./AdminRoute";
+import Forbidden from "../Components/Forbidden";
+import AssignRiders from "../pages/Dashboard/AssignRiders/AssignRiders";
 
 export const router = createBrowserRouter([
   {
@@ -26,7 +31,9 @@ export const router = createBrowserRouter([
     },
     {
 path:'rider',
-element:<PrivateRoute><Rider></Rider> </PrivateRoute>
+element:<PrivateRoute><Rider></Rider> </PrivateRoute>,
+loader:()=>fetch('/serverCenter.json').then(res=>res.json())
+
     },
     {
     path:'send-parcel',
@@ -79,6 +86,20 @@ Component:Payment
     {
       path:'payment-cancelled',
       Component:PaymentCancelled
+    },
+    {
+    path:'approved-riders',
+   // Component:ApprovedRiders
+    element:<AdminRoute><ApprovedRiders></ApprovedRiders></AdminRoute>
+    },
+    {
+    path:'assign-riders',
+  
+    element:<AdminRoute><AssignRiders></AssignRiders></AdminRoute>
+    },
+    {
+    path:'users-management',
+   element:<AdminRoute><UsersManagement></UsersManagement> </AdminRoute>
     }
    ] 
   }
